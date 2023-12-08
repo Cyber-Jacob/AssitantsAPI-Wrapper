@@ -20,24 +20,21 @@ client = OpenAI(
     api_key=OPENAI_API_KEY
 )
 
-#Create the chat interface here
 def start_conversation():
     while True:
         user_input = input("You: ")
         if user_input.lower() in ["exit", "quit"]:
             print("Ending the conversation.")
             break
-        #start a "Thread" using the user input. Currently, every run starts a new thread, which is not ideal.
+
         thread = client.beta.threads.create(
             messages=[{"role": "user", "content": user_input}]
         )
-        #this forces the OpenAI Api to use the content of the messages= loop variable to start a "run" processing our thread with the latest message
         run = client.beta.threads.runs.create(
             thread_id=thread.id,
             assistant_id=assistant_id
         )
 
-        #Per OpenAI documentation, we need to check on the status of our run by thread id. We will hold this status until it is "completed"
         while run.status != 'completed':
             run = client.beta.threads.runs.retrieve(
                 thread_id=thread.id,
@@ -45,13 +42,8 @@ def start_conversation():
             )
             time.sleep(1)
 
-        #after we see "completed" in the runs status for a givne thread id, we will append the entire thread to thread_messages
         thread_messages = client.beta.threads.messages.list(thread.id)
 
-        #formatting to help break the Http response into legible text, as well as respect the native formatting that OpenAI
-        #has baked into the model. In this case, we want to clearly format anywhere OpenAI API returns an \n or ```
-        #because OpenAI will do this around code blocks. In theory, this makes it easier to distinguish OpenAI's output to a 
-        #temrinal window
         for msg in thread_messages.data:
             if msg.role == "assistant":
                 formatted_response = ""

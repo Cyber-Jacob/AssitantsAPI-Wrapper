@@ -10,8 +10,7 @@ load_dotenv()
 #"THE_API_KEY" variable is our api key. We also call our Preferred Assistant by its' ID, also stored in .env for security
 assistant_id = os.getenv("ASSISTANT_ID")
 OPENAI_API_KEY = os.getenv("THE_API_KEY")
-
-#assign client. as the dot-notation object for calling our OpenAI functions. 
+ 
 #the api_key= script is important, because otherwise the OpenAI lib looks for an environmental variable using this call:
 #(OPENAI default behavior is to search for an environmental var with: os.getenv("OPENAI_API_KEY")
 #In our case, our env variable has a separate name of "THE_API_KEY"

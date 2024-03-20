@@ -48,7 +48,7 @@ def start_conversation():
                         if hasattr(content_part, 'text') and hasattr(content_part.text, 'value'):
                             formatted_response = content_part.text.value
                             formatted_response = formatted_response.replace("\\n", "\n").replace("```", "")
-                            console.print(formatted_response, style="bold green")
+                            console.print(formatted_response, style="green")
                 else:
                     console.print("Received response in unexpected format.", style="bold yellow")
 

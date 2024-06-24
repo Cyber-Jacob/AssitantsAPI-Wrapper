@@ -1,2 +1,2 @@
-# interpreter-assistant-1
+# AssistantsAPI-Wrapper
 This is a project to interact with the OpenAI Assistants API. The OpenAI Assistants API was released on the first OpenAI Dev Day, and represents a new way to interact with newly trained GPT-4 models that are much more powerful and offer much more capability and reliability out of the box. This project uses some files that I have used to create an assistant, as well as the client I use to communicate with the endpoint. This represent the communication portion of this project. Will place this interface on a webpage once we are comfortable working with this API.
